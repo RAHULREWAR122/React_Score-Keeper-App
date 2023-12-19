@@ -84,6 +84,9 @@ function handleSubmit(e) {
     ballElement = <span className="wickets">W</span>;
   } else if (hit === 6) {
     ballElement = <span className="six">6 </span>;
+  }else if(hit===0){
+    ballElement = <strong>dot</strong>;
+  
   } else {
     ballElement = <span>{hit}</span>;
   }
