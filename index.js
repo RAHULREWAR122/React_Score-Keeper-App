@@ -1,4 +1,3 @@
-
 let score = 0;
 let wickets = 0;
 let resultBalls = [];
@@ -14,19 +13,20 @@ function addScore(num) {
 }
 
 function addWickets() {
-  if (wickets < 10) {
+  if (wickets <= 10) {
     hit = "W";
-    if (wickets === 9) {
 
-      wickets = <span>Over</span>;
+     if (wickets === 9) {
+       wickets = <span>10</span>;
     }
+
     rendering.render(<App />);
   }
 }
 
 const ButtonsHandle = () => {
   return (
-    <>
+    <div className="mgb">
       <button onClick={() => addScore(0)}>0</button>
       <button onClick={() => addScore(1)}>1</button>
       <button onClick={() => addScore(2)}>2</button>
@@ -36,16 +36,19 @@ const ButtonsHandle = () => {
       <button className="wickets" onClick={addWickets}>
         wicket
       </button>
-    </>
+    </div>
   );
 };
 
 function DisplayScore() {
   return (
     <>
+      
       <h2>Score Keeper App</h2>
       <p>Score : {score} / {wickets}</p>
-    </>
+      <p>Overs : <Overs/></p> 
+     
+      </>
   );
 }
 
@@ -65,7 +68,7 @@ let Result = () => {
 };
 
 function handleSubmit(e) {
-  e.preventDefault();
+  e.preventDefault(e);
 
   if (hit === "W") {
     if (wickets <= 10) {
@@ -73,7 +76,7 @@ function handleSubmit(e) {
       totalBalls += 1;
     }
   } else {
-    if (wickets < 10) {
+    if (wickets <= 10) {
       score += hit;
       totalBalls += 1;
     }
@@ -92,7 +95,7 @@ function handleSubmit(e) {
   }
 
   if (wickets <= 10) {
-    resultBalls.unshift(
+    resultBalls.push(
       <React.Fragment key={resultBalls.length + 1}>
         {ballElement}
         <span className="msg">  {inpRef.current.value}</span>
@@ -128,19 +131,85 @@ const Overs = () => {
   );
 };
 
-const App = () => {
-  return (
-    <>
+const GameOverMsg = ()=>{
+   return (<div className="GameOverMsg">
+     <marquee className="gameOver">Game Over</marquee>
+     <form>
+       <button className="restart">Try Again</button>
+      </form>   
+   </div>)
+}
+
+
+let isModeChange = false;
+const Mode = ()=>{
+   isModeChange = !isModeChange;
+   UpdateMode(); 
+}
+
+const ThemeMode =()=>{
+  return(<>
+  <div id="ball" onClick={Mode}>Dark</div>
+  </>)
+}
+
+const UpdateMode = ()=>{
+    const ball = document.getElementById('ball');
+    const body = document.body;
+
+    if(isModeChange){
+      ball.textContent = 'Light';
+      body.style.backgroundColor = '#111';
+      body.style.color = '#fff';
+      ball.style.backgroundColor = '#fff'; 
+      ball.style.color = '#111'; 
+    }else{
+      ball.textContent = 'Dark';
+      body.style.backgroundColor = '#fff ';
+      body.style.color = '#111';
+      ball.style.backgroundColor = '#111';
+      ball.style.color = '#fff';
+    }
+
+}
+
+
+const BeforeGameOver = ()=>{
+  return (<>
       <DisplayScore />
       <ButtonsHandle />
       <Form />
       <hr />
-      <h3>{wickets <= 10 ? null : <h3>Target is : {score + 1}/<Overs /></h3>}</h3>
       <Result />
-   
+  
+  </>)
+}
+
+const AfterGameOver = ()=>{
+  return (<div className="divResult">
+      
+      {wickets <=10 ? null : <GameOverMsg/>}
+      <hr/>
+      <h3>{wickets <= 10 ? null : <h3>Target is : {score + 1}/{wickets}</h3>}</h3>
+      <h3>Your Result</h3>
+      <Result />
+     
+  </div>)
+}
+
+const App = () => {
+  return (
+    <>
+
+    <ThemeMode/>
+    {/* <BeforeGameOver/> 
+    <AfterGameOver/>  */}
+     {wickets <=10 ? <BeforeGameOver/> :<AfterGameOver/> }
+    
     </>
   );
 };
+
 
 
 

@@ -12,10 +12,19 @@
    
     <title>Score Keeper App</title>
     <style>
+
+body{
+    transition: background-color 0.5s ease;
+     
+}
+
 button{
     width: 60px;
     height: 50px;
     cursor: pointer;
+}
+.mgb{
+    margin-bottom: 30px;
 }
 .mainBTN{
     width: 130px;
@@ -55,13 +64,64 @@ button{
     margin-left: 5px;
 
 }
+.GameOverMsg{
+    width: 30%;
+    background: #8bb7e6;
+  
+    border-radius: 10px;
+    
+}
+.gameOver{
+    color: aqua;
+    font-size: 2rem;
+    margin: 0;
+}
+.divResult{
+    /* background: #e0d1e0; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.restart{
+
+    width: 90px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-bottom: 3px solid black;
+    transition: all .5s;
+}
+.restart:hover{
+    background: #000;
+    color: #e0d1e0;
+    border-bottom: 3px solid #43ffd3;
+    border-radius: 6px;
+}
+#ball {
+     width: 50px;
+     height: 50px;
+     color: #ffffff; /* Default: white */
+     background: #000;
+     border-radius: 50%;
+     position: absolute;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-weight: bold;
+     font-size: 14px;
+}
 
     </style>
 </head>
 <body>
   
-    <div id="root" style="text-align: center;"></div>
+    <div id="root" style="text-align: center;">
+    <script src="index.js" type="text/babel">
 
-    <script src="index.js" type="text/babel"></script>
+    </script>
 </body>
 </html>
